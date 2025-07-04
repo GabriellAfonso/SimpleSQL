@@ -24,8 +24,3 @@ int parse_sql(const char* input, Statement* out_stmt) {
 
     return -1;
 }
-
-int teste() {
-    printf("foi¿¿¿¿");
-    return 0;
-}
