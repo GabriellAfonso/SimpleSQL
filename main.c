@@ -4,7 +4,7 @@
 
 #include "lexer/lexer.h"
 #include "lexer/token.h"
-// #include "parser/parser.h"
+#include "parser/parser.h"
 
 #define INPUT_BUFFER_SIZE 1024
 
@@ -33,6 +33,8 @@ int main() {
             printf("Token %d: %-15s (%d)\n", i, tokens[i].lexeme,
                    tokens[i].type);
         }
+        Statement stmt;
+        parse_sql(tokens, &token_count, &stmt);
 
         free_tokens(tokens, token_count);
         return 0;

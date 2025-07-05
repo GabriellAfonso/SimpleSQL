@@ -1,4 +1,5 @@
 #ifndef PARSER_H
+#include "../lexer/token.h"
 #define PARSER_H
 typedef enum { TYPE_INT, TYPE_TEXT } ColumnType;
 
@@ -11,17 +12,17 @@ typedef struct Table {
     char name[64];
     int column_count;
     Column columns[16];
-} CreateTableStmt;
+} TableStmt;
 
-typedef enum { STMT_CREATE, STMT_INSERT } StatementType;
+typedef enum { STMT_CREATE, STMT_INSERT, STMT_DROP } StatementType;
 
 typedef struct {
     StatementType type;
     union {
-        CreateTableStmt create_stmt;
+        TableStmt table_stmt;
         // Futuro: InsertStmt insert_stmt;
     };
 } Statement;
 
-int parse_sql(const char* input, Statement* out_stmt);
+int parse_sql(Token* tokens, int* token_count, Statement* out_stmt);
 #endif
