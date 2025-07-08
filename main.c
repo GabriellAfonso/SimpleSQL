@@ -37,6 +37,6 @@ int main() {
         parse_sql(tokens, &token_count, &stmt);
 
         free_tokens(tokens, token_count);
-        return 0;
-    }
+        }
+    return 0;
 }
