@@ -2,16 +2,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "lexer/lexer.h"
-#include "lexer/token.h"
-#include "parser/parser.h"
-
 #define INPUT_BUFFER_SIZE 1024
+
+extern int yyparse(void);
+extern void yy_scan_string(const char*);
 
 int main() {
     char input[INPUT_BUFFER_SIZE];
     printf("SimpleSQL - Interactive Mode\n");
-    int token_count = 0;
 
     while (1) {
         printf("sql> ");
@@ -25,18 +23,12 @@ int main() {
 
         if (strcmp(input, "exit") == 0) {
             printf("Saindo.\n");
-            break;  // Sai do while(1)
+            break;
         }
 
-        Token* tokens = tokenize(input, &token_count);
-        for (int i = 0; i < token_count; i++) {
-            printf("Token %d: %-15s (%d)\n", i, tokens[i].lexeme,
-                   tokens[i].type);
-        }
-        Statement stmt;
-        parse_sql(tokens, &token_count, &stmt);
+        yy_scan_string(input);  // <- Aqui a mágica
+        yyparse();
+    }
 
-        free_tokens(tokens, token_count);
-        }
     return 0;
 }
