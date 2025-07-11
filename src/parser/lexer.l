@@ -1,3 +1,4 @@
+%option noinput nounput
 %{ 
 #include "database.h"
 #include "parser.tab.h"

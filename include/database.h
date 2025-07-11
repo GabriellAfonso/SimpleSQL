@@ -8,6 +8,7 @@
 #define MAX_NAME_LEN 64
 #define MAX_TEXT_LEN 256
 #define MAX_ROWS 1024
+#define DATABASE_FILENAME "simpleql.db"
 
 // Enum que representa tipos de dados aceitos
 typedef enum { TYPE_INT, TYPE_TEXT } ColumnType;
@@ -52,6 +53,7 @@ typedef struct {
 // Função para executar CREATE TABLE
 int execute_create_table(Database* db, const char* table_name, Column* columns,
                          int column_count);
+int save_database(Database* db);
 
 // // (Futuro) salvar em arquivo
 // int save_database(Database* db, const char* filename);
